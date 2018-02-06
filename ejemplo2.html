@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang "es">
+<head>
+<title> SEGUNDO EJEMPLO </title>
+
+<meta charset="utf-8" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<button id="get_btn" class="btn btn-default">Cargar</button>
+	<br>
+<div class ="panel panel-default">
+	<div class ="panel-heading">Respuesta </div>
+	<div class="panel-body" id="salida">Da click en el boton</div>
+</div>
+<script>
+$(function(){
+
+
+	$("#get_btn").on("click", function(){
+		
+		$.getJSON("https://materiales.canela.me/json_jquery/", function(datos){
+			var canciones = "<ul>";
+			$.each (datos, function(i, item){
+				var infocancion = "<li><img src='"+item.portada+"' width='100'/>" + item.titulo;
+                    infocancion += " - " + item.autor;
+                    infocancion += " <em>" + item.album + "</em> </li>";
+                    canciones += infocancion
+			})
+			canciones+="</ul>";
+			alert(canciones);
+			$("#salida").html(canciones);
+		})
+	})
+
+})
+</script>
+</body>

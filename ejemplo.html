@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang ="es">
+<head>
+<title>EJEMPLO</title>
+<meta charset="utf-8" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<style>
+		.cuadro{
+			display:inline-block;
+			vertical-align: top;
+			width: 300px;
+		}
+</style>
+</head>
+
+<body>
+
+	<input type="text" aria-describedby="basic-addon1" id="cuadrotexto">
+	<button class="btn btn-primary" id="buscar">BUSCAR</button>
+
+	<div id="imagenes"></div>
+<script>
+	$(function(){
+
+		$("#buscar").on("click", function(){
+			var texto = "";
+		    var tag = $("#cuadrotexto").val();
+		    $("#imagenes").text ("Cargando...")
+		    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+tag+"&tagmode=any&format=json&jsoncallback=?", function(datos){
+		    	$.each(datos.items, function(i, item){
+		    		texto+="<div class='cuadro'>"
+		    		texto+="<h5>" + item.title + "</h5>"
+		    		texto+="<img src='"+item.media.m+"'/>"
+		    		texto+="</div>"
+		    	$("#imagenes").html(texto);
+		    })
+		})
+
+	});
+})
+</script>
+
+</body>
+</html>
