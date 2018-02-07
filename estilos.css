@@ -1,0 +1,10 @@
+.get_btn {
+	transition: 0.3s;
+}
+
+.get_btn:hover {
+	transform: scale(1.2);
+}
+li:hover{
+	background-color: rgba(54,48,46, 0.1);
+}
